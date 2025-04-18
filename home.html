@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtVista - Home</title>
+<style>
+/* General Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+background-color: #f8f9fa;
+color: #333;
+line-height: 1.6;
+}
+a {
+text-decoration: none;
+color: #4e7a9e;
+}
+a:hover {
+text-decoration: underline;
+}
+.center-button {
+text-align: center;
+margin: 2rem 0;
+}
+/* Header Styles */
+header {
+background-color: white;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+padding: 1rem 5%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.logo h1 {
+color: #4e7a9e;
+font-size: 2rem;
+}
+nav ul {
+display: flex;
+list-style: none;
+}
+nav ul li {
+margin-left: 2rem;
+}
+nav ul li a {
+color: #333;
+font-weight: 500;
+padding: 0.5rem 0;
+transition: all 0.3s ease;
+}
+nav ul li a:hover {
+color: #4e7a9e;
+text-decoration: none;
+}
+nav ul li a.active {
+color: #4e7a9e;
+border-bottom: 2px solid #4e7a9e;
+}
+/* User Menu Styles */
+.user-menu {
+position: relative;
+}
+.user-menu-button {
+display: flex;
+align-items: center;
+background: none;
+border: none;
+color: #333;
+font-weight: 500;
+cursor: pointer;
+padding: 0.5rem;
+}
+.user-menu-button:hover {
+color: #4e7a9e;
+}
+.user-icon {
+width: 24px;
+height: 24px;
+background-color: #4e7a9e;
+border-radius: 50%;
+margin-right: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 14px;
+}
+.dropdown-menu {
+position: absolute;
+top: 100%;
+right: 0;
+background-color: white;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+border-radius: 4px;
+min-width: 180px;
+z-index: 100;
+display: none;
+}
+.dropdown-menu.show {
+display: block;
+}
+.dropdown-menu a {
+display: block;
+padding: 0.8rem 1rem;
+color: #333;
+border-bottom: 1px solid #eee;
+}
+.dropdown-menu a:hover {
+background-color: #f8f9fa;
+text-decoration: none;
+}
+.dropdown-menu a:last-child {
+border-bottom: none;
+}
+.dropdown-menu a.logout {
+color: #e74c3c;
+}
+/* Hero Section */
+.hero {
+background-color: #4e7a9e;
+background-size: cover;
+background-position: center;
+height: 500px;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+color: white;
+padding: 0 5%;
+}
+.hero-content {
+max-width: 800px;
+}
+.hero-content h2 {
+font-size: 2.5rem;
+margin-bottom: 1rem;
+}
+.hero-content p {
+font-size: 1.2rem;
+margin-bottom: 2rem;
+}
+/* Button Styles */
+.btn-primary {
+display: inline-block;
+padding: 0.8rem 2rem;
+background-color: #4e7a9e;
+color: white;
+border: none;
+border-radius: 4px;
+font-size: 1rem;
+font-weight: 500;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+background-color: #3d6a8f;
+}
+.btn-secondary {
+display: inline-block;
+padding: 0.6rem 1.2rem;
+background-color: transparent;
+color: #4e7a9e;
+border: 1px solid #4e7a9e;
+border-radius: 4px;
+font-size: 0.9rem;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+background-color: #4e7a9e;
+color: white;
+}
+.btn-tertiary {
+display: inline-block;
+padding: 0.5rem 1rem;
+background-color: #f8f9fa;
+color: #333;
+border: 1px solid #ddd;
+border-radius: 4px;
+font-size: 0.9rem;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.btn-tertiary:hover {
+background-color: #e9ecef;
+color: #4e7a9e;
+text-decoration: none;
+}
+/* Featured Section */
+.featured-section {
+padding: 4rem 5%;
+}
+.featured-section h2 {
+text-align: center;
+margin-bottom: 2rem;
+color: #333;
+font-size: 2rem;
+}
+.artwork-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+gap: 2rem;
+}
+.artwork-card {
+background-color: white;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease;
+}
+.artwork-card:hover {
+transform: translateY(-5px);
+}
+.artwork-image {
+height: 200px;
+background-size: cover;
+background-position: center;
+}
+.artwork-info {
+padding: 1.5rem;
+}
+.artwork-info h3 {
+margin-bottom: 0.5rem;
+}
+.artwork-info .artist {
+color: #666;
+margin-bottom: 0.5rem;
+}
+.artwork-info .price {
+font-weight: bold;
+color: #4e7a9e;
+margin-bottom: 1rem;
+}
+/* Categories Section */
+.categories-section {
+padding: 4rem 5%;
+background-color: #f0f4f8;
+}
+.categories-section h2 {
+text-align: center;
+margin-bottom: 2rem;
+color: #333;
+font-size: 2rem;
+}
+.categories-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+gap: 2rem;
+}
+.category-card {
+background-color: white;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+text-align: center;
+transition: transform 0.3s ease;
+cursor: pointer;
+}
+.category-card:hover {
+transform: translateY(-5px);
+}
+.category-image {
+height: 150px;
+background-size: cover;
+background-position: center;
+}
+.category-card h3 {
+padding: 1rem;
+}
+/* Featured Artists Section */
+.featured-artists {
+padding: 4rem 5%;
+}
+.featured-artists h2 {
+text-align: center;
+margin-bottom: 2rem;
+color: #333;
+font-size: 2rem;
+}
+.artist-cards {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+gap: 2rem;
+}
+.artist-card {
+background-color: white;
+border-radius: 8px;
+padding: 1.5rem;
+text-align: center;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease;
+}
+.artist-card:hover {
+transform: translateY(-5px);
+}
+.artist-avatar {
+width: 100px;
+height: 100px;
+border-radius: 80%;
+margin: 0 auto 1rem;
+background-size: cover;
+background-position: center;
+}
+.artist-card h3 {
+margin-bottom: 0.5rem;
+}
+.artist-card p {
+color: #666;
+margin-bottom: 1rem;
+}
+/* Footer Styles */
+footer {
+background-color: #333;
+color: white;
+padding: 2rem 5% 1rem;
+}
+.footer-content {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+margin-bottom: 2rem;
+}
+.footer-section {
+flex: 1;
+min-width: 250px;
+margin-bottom: 1.5rem;
+}
+.footer-section h3 {
+margin-bottom: 1rem;
+font-size: 1.2rem;
+}
+.footer-section ul {
+list-style: none;
+}
+.footer-section ul li {
+margin-bottom: 0.5rem;
+}
+.footer-section ul li a {
+color: #ddd;
+}
+.footer-section ul li a:hover {
+color: white;
+}
+.footer-bottom {
+text-align: center;
+padding-top: 1rem;
+border-top: 1px solid #444;
+}
+/* Loading animation */
+.loading {
+display: inline-block;
+width: 20px;
+height: 20px;
+margin-left: 10px;
+border: 3px solid rgba(78, 122, 158, 0.3);
+border-radius: 50%;
+border-top-color: #4e7a9e;
+animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+to { transform: rotate(360deg); }
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+header {
+flex-direction: column;
+padding: 1rem;
+}
+nav ul {
+margin-top: 1rem;
+flex-wrap: wrap;
+justify-content: center;
+}
+nav ul li {
+margin: 0.5rem;
+}
+.hero-content h2 {
+font-size: 2rem;
+}
+.hero-content p {
+font-size: 1rem;
+}
+.artwork-grid,
+.categories-grid,
+.artist-cards {
+grid-template-columns: 1fr;
+}
+.footer-section {
+flex: 100%;
+text-align: center;
+}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<h1>ArtVista</h1>
+</div>
+<nav>
+<ul>
+<li><a href="index.html">Register</a></li>
+<li><a href="login.html">Login</a></li>
+<li><a href="home.html" class="active">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="artists.html">Artists</a></li>
+</ul>
+</nav>
+<div class="user-menu">
+<button id="userMenuButton" class="user-menu-button">
+<div class="user-icon">U</div>
+<span>Account</span>
+</button>
+<div id="userDropdown" class="dropdown-menu">
+<a href="#">My Profile</a>
+<a href="#">My Collection</a>
+<a href="#">Settings</a>
+<a href="#" class="logout" id="logoutButton">Logout</a>
+</div>
+</div>
+</header>
+<section class="hero">
+<div class="hero-content">
+<h2>Discover Unique Artworks from Artists Around the World</h2>
+<p>Find your next masterpiece from our curated collection of paintings, sculptures, and digital
+art</p>
+<button class="btn-primary">Explore Collection</button>
+</div>
+</section>
+
+<main>
+<section class="featured-section">
+<h2>Featured Artworks</h2>
+<div class="artwork-grid" id="artworkGrid">
+<div class="artwork-card">
+<div class="artwork-image" style="background-image:url(abstract.jpg);"></div>
+<div class="artwork-info">
+<h3>Abstract Harmony</h3>
+<p class="artist">by Elena Rodriguez</p>
+<p class="price">$1,200</p>
+<button class="btn-secondary">Purchase</button>
+</div>
+</div>
+<div class="artwork-card">
+<div class="artwork-image" style="background-image: url(serene.jpg);"></div>
+<div class="artwork-info">
+<h3>Serene Landscape</h3>
+<p class="artist">by James Wilson</p>
+<p class="price">$950</p>
+<button class="btn-secondary">Purchase</button>
+</div>
+</div>
+<div class="artwork-card">
+<div class="artwork-image" style="background-image: url(urban.jpg);"></div>
+<div class="artwork-info">
+<h3>Urban Motion</h3>
+<p class="artist">by Akira Tanaka</p>
+<p class="price">$1,500</p>
+<button class="btn-secondary">Purchase</button>
+</div>
+</div>
+<div class="artwork-card">
+<div class="artwork-image" style="background-image:url(infinite.jpg);"></div>
+<div class="artwork-info">
+<h3>Infinite Dreams</h3>
+<p class="artist">by Sarah Johnson</p>
+<p class="price">$2,200</p>
+<button class="btn-secondary">Purchase</button>
+</div>
+</div>
+</div>
+<div class="center-button">
+<button class="btn-primary" id="loadMoreButton">View All Artworks <span id="loadingIndicator" class="loading" style="display: none;"></span></button>
+</div>
+</section>
+<section class="categories-section">
+<h2>Our Collections</h2>
+<div class="categories-grid">
+<div class="category-card">
+<div class="category-image" style="background-image:url(paintings.jpg);"></div>
+<h3>Paintings</h3>
+</div>
+<div class="category-card">
+<div class="category-image" style="background-image: url(sculptures.jpg);"></div>
+<h3>Sculptures</h3>
+</div>
+<div class="category-card">
+<div class="category-image" style="background-image: url(digital.jpg);"></div>
+<h3>Digital Art</h3>
+</div>
+<div class="category-card">
+<div class="category-image" style="background-image: url(photography.jpg);"></div>
+<h3>Photography</h3>
+</div>
+</div>
+</section>
+<section class="featured-artists">
+<h2>Featured Artists</h2>
+<div class="artist-cards">
+<div class="artist-card">
+<div class="artist-avatar" style="background-image: url('https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=1467&auto=format&fit=crop')"></div>
+<h3>Elena Rodriguez</h3>
+<p>Abstract Expressionism</p>
+<a href="artists.html" class="btn-tertiary">View Profile</a>
+</div>
+<div class="artist-card">
+<div class="artist-avatar" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop');"></div>
+<h3>James Wilson</h3>
+<p>Landscape & Nature</p>
+<a href="artists.html" class="btn-tertiary">View Profile</a>
+</div>
+<div class="artist-card">
+<div class="artist-avatar" style="background-image: url('https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=1399&auto=format&fit=crop');"></div>
+<h3>Akira Tanaka</h3>
+<p>Urban Contemporary</p>
+<a href="artists.html" class="btn-tertiary">View Profile</a>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="footer-content">
+<div class="footer-section">
+<h3>ArtVista</h3>
+<p>Connecting artists and art lovers since 2025</p>
+</div>
+<div class="footer-section">
+<h3>Quick Links</h3>
+<ul>
+<li><a href="home.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="artists.html">Artists</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Contact</h3>
+<p>Email: info@artvista.com</p>
+<p>Phone: (123) 456-7890</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2025 ArtVista. All rights reserved.</p>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if user is logged in (demo only)
+    const isLoggedIn = localStorage.getItem('loggedIn') || sessionStorage.getItem('loggedIn');
+    
+    // Show/hide user menu based on login status
+    const userMenu = document.querySelector('.user-menu');
+    if (isLoggedIn) {
+        userMenu.style.display = 'block';
+        
+        // Get user data if available
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        if (userData.fullName) {
+            // Set first initial in the user icon
+            const userIcon = document.querySelector('.user-icon');
+            userIcon.textContent = userData.fullName.charAt(0);
+        }
+    } else {
+        userMenu.style.display = 'none';
+    }
+    
+    // User dropdown toggle
+    const userMenuButton = document.getElementById('userMenuButton');
+    const userDropdown = document.getElementById('userDropdown');
+    
+    userMenuButton.addEventListener('click', function() {
+        userDropdown.classList.toggle('show');
+    });
+    
+    // Close dropdown when clicking outside
+    window.addEventListener('click', function(event) {
+        if (!event.target.matches('.user-menu-button') && !event.target.closest('.user-menu-button')) {
+            if (userDropdown.classList.contains('show')) {
+                userDropdown.classList.remove('show');
+            }
+        }
+    });
+    
+    // Logout functionality
+    const logoutButton = document.getElementById('logoutButton');
+    logoutButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('loggedIn');
+        sessionStorage.removeItem('loggedIn');
+        alert('You have been logged out successfully.');
+        window.location.href = 'login.html';
+    });
+
+    // Featured artworks interaction
+    function setupArtworkCardInteractions(cards) {
+        cards.forEach(card => {
+            const viewButton = card.querySelector('.btn-secondary');
+            
+        });
+    }
+
+    // Initialize existing artwork cards
+    const artworkCards = document.querySelectorAll('.artwork-card');
+    setupArtworkCardInteractions(artworkCards);
+    
+    // Hero button
+    const exploreButton = document.querySelector('.hero-content .btn-primary');
+    exploreButton.addEventListener('click', function() {
+        // Scroll to the featured section
+        document.querySelector('.featured-section').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Additional artwork data (simulated database)
+    const additionalArtworks = [
+        {
+            title: "Cosmic Reflections",
+            artist: "Maya Chen",
+            price: "$1,800",
+            image: "cosmic.jpg"
+        },
+        {
+            title: "Sunset by the Shore",
+            artist: "Daniel Brown",
+            price: "$1,350",
+            image: "sunset.jpg"
+        },
+        {
+            title: "Geometric Wonders",
+            artist: "Olivia Patel",
+            price: "$2,100",
+            image: "geometric.jpg"
+        },
+        {
+            title: "Winter Dreams",
+            artist: "Marco Rossi",
+            price: "$1,600",
+            image: "winter.jpg"
+        },
+        {
+            title: "Soul of the Forest",
+            artist: "Leila Kim",
+            price: "$2,500",
+            image: "forest.jpg"
+        },
+        {
+            title: "Urban Nightlife",
+            artist: "Tyler Jackson",
+            price: "$1,750",
+            image: "nightlife.jpg"
+        },
+        {
+            title: "Serenity in Blue",
+            artist: "Sofia Garcia",
+            price: "$1,300",
+            image: "blue.jpg"
+        },
+        {
+            title: "Autumn Memories",
+            artist: "Alexander Smith",
+            price: "$1,950",
+            image: "autumn.jpg"
+        }
+    ];
+    
+    // Track if all artworks are loaded
+    let allArtworksLoaded = false;
+    let currentPage = 1;
+    const artworksPerLoad = 4;
+    
+    // View All Artworks / Load More button
+    const loadMoreButton = document.getElementById('loadMoreButton');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const artworkGrid = document.getElementById('artworkGrid');
+    
+    loadMoreButton.addEventListener('click', function() {
+        if (allArtworksLoaded) {
+            // If all artworks are already loaded, scroll to top of artwork section
+            document.querySelector('.featured-section').scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+        
+        // Show loading indicator
+        loadingIndicator.style.display = 'inline-block';
+        loadMoreButton.disabled = true;
+        
+        // Simulate loading delay
+        setTimeout(function() {
+            // Calculate which artworks to add
+            const startIndex = (currentPage - 1) * artworksPerLoad;
+            const endIndex = Math.min(startIndex + artworksPerLoad, additionalArtworks.length);
+            const artworksToAdd = additionalArtworks.slice(startIndex, endIndex);
+            
+            // Add new artworks
+            artworksToAdd.forEach(artwork => {
+                const artworkCard = document.createElement('div');
+                artworkCard.className = 'artwork-card';
+                artworkCard.innerHTML = `
+                    <div class="artwork-image" style="background-image: url(${artwork.image});"></div>
+                    <div class="artwork-info">
+                        <h3>${artwork.title}</h3>
+                        <p class="artist">by ${artwork.artist}</p>
+                        <p class="price">${artwork.price}</p>
+                        <button class="btn-secondary">Purchase</button>
+                    </div>
+                `;
+                artworkGrid.appendChild(artworkCard);
+            });
+            
+            // Setup interactions for new cards
+            setupArtworkCardInteractions(document.querySelectorAll('.artwork-card'));
+            
+            // Update page counter
+            currentPage++;
+            
+            // Check if all artworks are now loaded
+            if (endIndex >= additionalArtworks.length) {
+                allArtworksLoaded = true;
+                loadMoreButton.textContent = 'All Artworks Loaded';
+            }
+            
+            // Hide loading indicator
+            loadingIndicator.style.display = 'none';
+            loadMoreButton.disabled = false;
+            
+        }, 800); // Simulate network delay of 800ms
+    });
+    
+    // Category cards
+    const categoryCards = document.querySelectorAll('.category-card');
+    categoryCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const categoryName = card.querySelector('h3').textContent;
+            alert(`You selected the ${categoryName} category. In a real application, this would filter artworks by category.`);
+        });
+    });
+});
+</script>
+</body>
+</html>

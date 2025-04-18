@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtVista - Login</title>
+<style>
+/* General Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+background-color: #f8f9fa;
+color: #333;
+line-height: 1.6;
+}
+a {
+text-decoration: none;
+color: #4e7a9e;
+}
+a:hover {
+text-decoration: underline;
+}
+/* Header Styles */
+header {
+background-color: white;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+padding: 1rem 5%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.logo h1 {
+color: #4e7a9e;
+font-size: 2rem;
+}
+nav ul {
+display: flex;
+list-style: none;
+}
+nav ul li {
+margin-left: 2rem;
+}
+nav ul li a {
+color: #333;
+font-weight: 500;
+padding: 0.5rem 0;
+transition: all 0.3s ease;
+}
+nav ul li a:hover {
+color: #4e7a9e;
+text-decoration: none;
+}
+nav ul li a.active {
+color: #4e7a9e;
+border-bottom: 2px solid #4e7a9e;
+}
+/* Main Content Styles */
+main {
+padding: 2rem 5%;
+min-height: calc(100vh - 200px);
+}
+.form-container {
+max-width: 500px;
+margin: 0 auto;
+background-color: white;
+padding: 2rem;
+border-radius: 8px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.form-container h2 {
+text-align: center;
+margin-bottom: 2rem;
+color: #4e7a9e;
+}
+.form-group {
+margin-bottom: 1.5rem;
+}
+.form-group label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: 500;
+}
+.form-group input[type="email"],
+.form-group input[type="password"] {
+width: 100%;
+padding: 0.8rem;
+border: 1px solid #ddd;
+border-radius: 4px;
+font-size: 1rem;
+}
+.remember-me {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.remember-me input[type="checkbox"] {
+margin-right: 0.5rem;
+}
+.forgot-password {
+margin-left: auto;
+}
+.btn-primary {
+display: block;
+width: 100%;
+padding: 0.8rem;
+background-color: #4e7a9e;
+color: white;
+border: none;
+border-radius: 4px;
+font-size: 1rem;
+font-weight: 500;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+background-color: #3d6a8f;
+}
+.form-footer {
+text-align: center;
+margin-top: 1.5rem;
+margin-bottom: 1.5rem;
+}
+.social-login {
+text-align: center;
+}
+.social-login p {
+position: relative;
+margin-bottom: 1rem;
+}
+.social-login p::before,
+.social-login p::after {
+content: "";
+position: absolute;
+top: 50%;
+width: 30%;
+height: 1px;
+background-color: #ddd;
+}
+.social-login p::before {
+left: 0;
+}
+.social-login p::after {
+right: 0;
+}
+.social-buttons {
+display: flex;
+justify-content: center;
+gap: 1rem;
+}
+.btn-social {
+padding: 0.6rem 1.2rem;
+border: 1px solid #ddd;
+border-radius: 4px;
+background-color: white;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.btn-social.google:hover {
+background-color: #f2f2f2;
+}
+.btn-social.facebook:hover {
+background-color: #f0f2f5;
+}
+/* Footer Styles */
+footer {
+background-color: #333;
+color: white;
+padding: 2rem 5% 1rem;
+}
+.footer-content {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+margin-bottom: 2rem;
+}
+.footer-section {
+flex: 1;
+min-width: 250px;
+margin-bottom: 1.5rem;
+}
+.footer-section h3 {
+margin-bottom: 1rem;
+font-size: 1.2rem;
+}
+.footer-section ul {
+list-style: none;
+}
+.footer-section ul li {
+margin-bottom: 0.5rem;
+}
+.footer-section ul li a {
+color: #ddd;
+}
+.footer-section ul li a:hover {
+color: white;
+}
+.footer-bottom {
+text-align: center;
+padding-top: 1rem;
+border-top: 1px solid #444;
+}
+/* Error and Success Messages */
+.error-message {
+color: #dc3545;
+background-color: #f8d7da;
+border: 1px solid #f5c6cb;
+border-radius: 4px;
+padding: 0.75rem 1.25rem;
+margin-bottom: 1rem;
+text-align: center;
+}
+.success-message {
+color: #28a745;
+background-color: #d4edda;
+border: 1px solid #c3e6cb;
+border-radius: 4px;
+padding: 0.75rem 1.25rem;
+margin-bottom: 1rem;
+text-align: center;
+}
+.input-error {
+border: 1px solid #dc3545 !important;
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+header {
+flex-direction: column;
+padding: 1rem;
+}
+nav ul {
+margin-top: 1rem;
+flex-wrap: wrap;
+justify-content: center;
+}
+nav ul li {
+margin: 0.5rem;
+}
+.form-container {
+padding: 1.5rem;
+}
+.footer-section {
+flex: 100%;
+text-align: center;
+}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<h1>ArtVista</h1>
+</div>
+<nav>
+<ul>
+<li><a href="index.html">Register</a></li>
+<li><a href="login.php" class="active">Login</a></li>
+<li><a href="home.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="artists.html">Artists</a></li>
+</ul>
+</nav>
+</header>
+<main>
+<section class="form-container">
+<h2>Welcome Back</h2>
+
+
+<form id="loginForm" method="POST" action="login.php">
+<div class="form-group">
+<label for="loginEmail">Email Address</label>
+<input type="email" id="loginEmail" name="loginEmail" required>
+</div>
+<div class="form-group">
+<label for="loginPassword">Password</label>
+<input type="password" id="loginPassword" name="loginPassword" required>
+</div>
+<div class="form-group remember-me">
+<div>
+<input type="checkbox" id="rememberMe" name="rememberMe">
+<label for="rememberMe">Remember me</label>
+</div>
+<a href="#" class="forgot-password">Forgot Password?</a>
+</div>
+<button type="submit" class="btn-primary">Login</button>
+</form>
+<div class="form-footer">
+<p>Don't have an account? <a href="index.html">Register here</a></p>
+</div>
+<div class="social-login">
+<p>Or login with</p>
+<div class="social-buttons">
+<button type="button" class="btn-social google" onclick="socialLogin('google')">Google</button>
+<button type="button" class="btn-social facebook" onclick="socialLogin('facebook')">Facebook</button>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="footer-content">
+<div class="footer-section">
+<h3>ArtVista</h3>
+<p>Connecting artists and art lovers since 2025</p>
+</div>
+<div class="footer-section">
+<h3>Quick Links</h3>
+<ul>
+<li><a href="home.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="artists.html">Artists</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Contact</h3>
+<p>Email: info@artvista.com</p>
+<p>Phone: (123) 456-7890</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2025 ArtVista. All rights reserved.</p>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const loginForm = document.getElementById('loginForm');
+
+// Client-side validation functions
+function validateEmail() {
+const emailField = document.getElementById('loginEmail');
+const email = emailField.value;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+if (email.trim() === '') {
+emailField.classList.add('input-error');
+return false;
+} else if (!emailRegex.test(email)) {
+emailField.classList.add('input-error');
+return false;
+} else {
+emailField.classList.remove('input-error');
+return true;
+}
+}
+
+function validatePassword() {
+const passwordField = document.getElementById('loginPassword');
+const password = passwordField.value;
+if (password.trim() === '') {
+passwordField.classList.add('input-error');
+return false;
+} else {
+passwordField.classList.remove('input-error');
+return true;
+}
+}
+
+// Add event listeners for real-time validation
+document.getElementById('loginEmail').addEventListener('input', validateEmail);
+document.getElementById('loginPassword').addEventListener('input', validatePassword);
+
+// Form submission handler
+loginForm.addEventListener('submit', function(e) {
+// Validate all fields
+const isEmailValid = validateEmail();
+const isPasswordValid = validatePassword();
+
+// If any validation fails, stop form submission
+if (!isEmailValid || !isPasswordValid) {
+e.preventDefault();
+return false;
+}
+});
+
+// Handle forgot password link
+document.querySelector('.forgot-password').addEventListener('click', function(e) {
+e.preventDefault();
+alert('Password recovery functionality would be implemented here.');
+});
+});
+
+// Social login function (placeholder)
+function socialLogin(provider) {
+alert(provider + ' login functionality would be implemented here.');
+// In a real implementation, this would redirect to the OAuth provider
+}
+</script>
+</body>
+</html>

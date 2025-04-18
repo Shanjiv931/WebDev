@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtVista - Artists</title>
+<style>
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+a {
+    text-decoration: none;
+    color: #4e7a9e;
+}
+a:hover {
+    text-decoration: underline;
+}
+.center-button {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+/* Header Styles */
+header {
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo h1 {
+    color: #4e7a9e;
+    font-size: 2rem;
+}
+nav ul {
+    display: flex;
+    list-style: none;
+}
+nav ul li {
+    margin-left: 2rem;
+}
+nav ul li a {
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+}
+nav ul li a:hover {
+    color: #4e7a9e;
+    text-decoration: none;
+}
+nav ul li a.active {
+    color: #4e7a9e;
+    border-bottom: 2px solid #4e7a9e;
+}
+
+/* Artist Hero Section */
+.artist-hero {
+    background-color: #4e7a9e;
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 5%;
+}
+.artist-hero-content {
+    max-width: 800px;
+}
+.artist-hero-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.artist-hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Button Styles */
+.btn-primary {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: #4e7a9e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+    background-color: #3d6a8f;
+}
+.btn-secondary {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: transparent;
+    color: #4e7a9e;
+    border: 1px solid #4e7a9e;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+    background-color: #4e7a9e;
+    color: white;
+}
+.btn-tertiary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-tertiary:hover {
+    background-color: #e9ecef;
+    color: #4e7a9e;
+    text-decoration: none;
+}
+
+/* Search and Filter Section */
+.search-filter {
+    padding: 2rem 5%;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+}
+.search-filter-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+.search-box {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+}
+.search-box input {
+    width: 100%;
+    padding: 0.8rem;
+    padding-left: 2.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+.search-icon {
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+.filter-dropdown {
+    flex: 0 0 auto;
+}
+.filter-dropdown select {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Artists Grid Section */
+.artists-grid-section {
+    padding: 4rem 5%;
+}
+.artists-grid-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    font-size: 2rem;
+}
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.artist-profile-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.artist-profile-card:hover {
+    transform: translateY(-5px);
+}
+.artist-cover {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.artist-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 4px solid white;
+    position: absolute;
+    bottom: -50px;
+    left: 20px;
+}
+.artist-info {
+    padding: 3rem 1.5rem 1.5rem;
+}
+.artist-info h3 {
+    margin-bottom: 0.5rem;
+}
+.artist-info .specialty {
+    color: #666;
+    margin-bottom: 1rem;
+}
+.artist-info .bio {
+    margin-bottom: 1rem;
+    color: #555;
+}
+.artist-stats {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    color: #777;
+}
+
+/* Featured Artist Section */
+.featured-artist-section {
+    padding: 4rem 5%;
+    background-color: #f0f4f8;
+}
+.featured-artist-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    font-size: 2rem;
+}
+.featured-artist-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+}
+.featured-artist-image {
+    flex: 1;
+    min-width: 300px;
+    background-color: #9b59b6;
+    background-size: cover;
+    background-position: center;
+}
+.featured-artist-content {
+    flex: 2;
+    min-width: 300px;
+    padding: 2rem;
+}
+.featured-artist-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #4e7a9e;
+}
+.featured-artist-content .specialty {
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: #666;
+}
+.featured-artist-content .bio {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+.featured-artwork-preview {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+.preview-thumbnail {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 2rem 5% 1rem;
+}
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 1.5rem;
+}
+.footer-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+.footer-section ul {
+    list-style: none;
+}
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+.footer-section ul li a {
+    color: #ddd;
+}
+.footer-section ul li a:hover {
+    color: white;
+}
+.footer-bottom {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #444;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    nav ul {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    nav ul li {
+        margin: 0.5rem;
+    }
+    .artist-hero-content h2 {
+        font-size: 2rem;
+    }
+    .artist-hero-content p {
+        font-size: 1rem;
+    }
+    .artists-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-section {
+        flex: 100%;
+        text-align: center;
+    }
+}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1>ArtVista</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Register</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="artists.html" class="active">Artists</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="artist-hero">
+    <div class="artist-hero-content">
+        <h2>Discover Creative Minds</h2>
+        <p>Connect with talented artists from around the world and explore their unique works</p>
+        <button class="btn-primary">Find Your Favorite Artist</button>
+    </div>
+</section>
+
+
+
+<section class="featured-artist-section">
+    <h2>Featured Artist of the Month</h2>
+    <div class="featured-artist-container">
+        <div class="featured-artist-image" style="background-image: url('featured-artist-image.jpg');"></div>
+        <div class="featured-artist-content">
+            <h3>Maya Hernandez</h3>
+            <p class="specialty">Contemporary Impressionist</p>
+            <div class="bio">
+                <p>Maya Hernandez has been creating breathtaking impressionist pieces for over 15 years. Her work has been featured in galleries across Europe and North America, with her distinctive style blending traditional techniques with contemporary themes.</p>
+                <p>Based in Barcelona, Maya draws inspiration from urban landscapes and the interplay of light in metropolitan environments.</p>
+            </div>
+            
+            <div class="featured-artwork-preview">
+                <div class="preview-thumbnail" style="background-image: url('01.jpg');"></div>
+                <div class="preview-thumbnail" style="background-image: url('02.jpg');"></div>
+                <div class="preview-thumbnail" style="background-image: url('03.jpg');"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="artists-grid-section">
+  <h2>Explore Our Artists</h2>
+  <div class="artists-grid">
+    <!-- Artist 1: Elena Rodriguez -->
+    <div class="artist-profile-card">
+      <div class="artist-cover" style="background-image: url('https://images.unsplash.com/photo-1529251333259-d36cccaf22ea?q=80&w=1470&auto=format&fit=crop'); background-position: center;">
+        <div class="artist-avatar" style="background-image: url('https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=1467&auto=format&fit=crop'); background-position: center;"></div>
+      </div>
+      <div class="artist-info">
+        <h3>Elena Rodriguez</h3>
+        <p class="specialty">Abstract Expressionism</p>
+        <p class="bio">Elena creates vibrant abstract pieces inspired by her travels throughout
+        South America. Her work explores themes of identity and cultural heritage.</p>
+        
+        <div class="artist-stats">
+          <span>43 Artworks</span>
+          <span>16 Exhibitions</span>
+        </div>
+      </div>
+    </div>
+    <!-- Artist 2: James Wilson -->
+    <div class="artist-profile-card">
+      <div class="artist-cover" style="background-image: url('https://images.unsplash.com/photo-1602532305019-3dbbd482dae9?q=80&w=1528&auto=format&fit=crop'); background-position: center;">
+        <div class="artist-avatar" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop'); background-position: center;"></div>
+      </div>
+      <div class="artist-info">
+        <h3>James Wilson</h3>
+        <p class="specialty">Landscape & Nature</p>
+        <p class="bio">James specializes in breathtaking landscapes that capture the majesty of the
+        natural world. His detailed work showcases remote wilderness locations.</p>
+        
+        <div class="artist-stats">
+          <span>27 Artworks</span>
+          <span>9 Exhibitions</span>
+        </div>
+      </div>
+    </div>
+    <!-- Artist 3: Akira Tanaka -->
+    <div class="artist-profile-card">
+      <div class="artist-cover" style="background-image: url('https://images.unsplash.com/photo-1529251333259-d36cccaf22ea?q=80&w=1470&auto=format&fit=crop'); background-position: center;">
+        <div class="artist-avatar" style="background-image: url('https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=1399&auto=format&fit=crop'); background-position: center;"></div>
+      </div>
+      <div class="artist-info">
+        <h3>Akira Tanaka</h3>
+        <p class="specialty">Urban Contemporary</p>
+        <p class="bio">Akira's work is influenced by urban architecture and city life. His mixed
+        media approach combines traditional painting with digital elements.</p>
+        
+        <div class="artist-stats">
+          <span>31 Artworks</span>
+          <span>12 Exhibitions</span>
+        </div>
+      </div>
+    </div>
+    <!-- Artist 4: Sarah Johnson -->
+    <div class="artist-profile-card">
+      <div class="artist-cover" style="background-image: url('https://images.unsplash.com/photo-1602532305019-3dbbd482dae9?q=80&w=1528&auto=format&fit=crop'); background-position: center;">
+        <div class="artist-avatar" style="background-image: url('https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?q=80&w=1374&auto=format&fit=crop'); background-position: center;"></div>
+      </div>
+      <div class="artist-info">
+        <h3>Sarah Johnson</h3>
+        <p class="specialty">Surrealism</p>
+        <p class="bio">Sarah creates dreamlike scenes that challenge perception and reality. Her
+        paintings invite viewers to explore complex emotional landscapes.</p>
+        
+        <div class="artist-stats">
+          <span>19 Artworks</span>
+          <span>7 Exhibitions</span>
+        </div>
+      </div>
+    </div>
+    <!-- Artist 5: David Chen -->
+    <div class="artist-profile-card">
+      <div class="artist-cover" style="background-image: url('https://images.unsplash.com/photo-1529251333259-d36cccaf22ea?q=80&w=1470&auto=format&fit=crop'); background-position: center;">
+        <div class="artist-avatar" style="background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1374&auto=format&fit=crop'); background-position: center;"></div>
+      </div>
+      <div class="artist-info">
+        <h3>David Chen</h3>
+        <p class="specialty">Digital Illustration</p>
+        <p class="bio">David is at the forefront of digital art, creating stunning illustrations that
+        blend fantasy elements with contemporary themes and vibrant colors.</p>
+        
+        <div class="artist-stats">
+          <span>52 Artworks</span>
+          <span>8 Exhibitions</span>
+        </div>
+      </div>
+    </div>
+    <!-- Artist 6: Olivia Bennett -->
+    <div class="artist-profile-card">
+      <div class="artist-cover" style="background-image: url('https://images.unsplash.com/photo-1602532305019-3dbbd482dae9?q=80&w=1528&auto=format&fit=crop'); background-position: center;">
+        <div class="artist-avatar" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1528&auto=format&fit=crop'); background-position: center;"></div>
+      </div>
+      <div class="artist-info">
+        <h3>Olivia Bennett</h3>
+        <p class="specialty">Sculpture & Installation</p>
+        <p class="bio">Olivia works primarily with sustainable materials to create powerful
+        installations that address environmental themes and human impact.</p>
+        
+        <div class="artist-stats">
+          <span>15 Artworks</span>
+          <span>11 Exhibitions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>ArtVista</h3>
+            <p>Connecting artists and art lovers since 2025</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="artists.html">Artists</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <p>Email: info@artvista.com</p>
+            <p>Phone: (123) 456-7890</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 ArtVista. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if user is logged in (demo only)
+    const isLoggedIn = localStorage.getItem('loggedIn') || sessionStorage.getItem('loggedIn');
+    
+    // Hero button functionality
+    const findArtistButton = document.querySelector('.artist-hero-content .btn-primary');
+    findArtistButton.addEventListener('click', function() {
+        // Scroll to artists grid section
+        document.querySelector('.artists-grid-section').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Search functionality
+    const searchInput = document.querySelector('.search-box input');
+    searchInput.addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') {
+            const searchTerm = searchInput.value.toLowerCase();
+            alert(`Searching for artists matching: "${searchTerm}". In a real application, this would filter the artists.`);
+        }
+    });
+    
+    // Specialty filter functionality
+    const specialtyFilter = document.querySelector('.filter-dropdown select');
+    specialtyFilter.addEventListener('change', function() {
+        const selectedSpecialty = specialtyFilter.value;
+        if (selectedSpecialty) {
+            alert(`Filtering artists by ${selectedSpecialty}. In a real application, this would filter the artists list.`);
+        } else {
+            alert('Showing all artists. In a real application, this would reset the filter.');
+        }
+    });
+    
+    // Artist profile view buttons
+    const profileButtons = document.querySelectorAll('.btn-secondary');
+    profileButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const artistName = this.closest('.artist-info, .featured-artist-content').querySelector('h3').textContent;
+            if (isLoggedIn) {
+                alert(`Viewing ${artistName}'s full profile. In a real application, this would navigate to their profile page.`);
+            } else {
+                alert('Please log in to view artist profiles');
+                window.location.href = 'login.html';
+            }
+        });
+    });
+    
+    // Featured artwork thumbnails
+    const thumbnails = document.querySelectorAll('.preview-thumbnail');
+    thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', function() {
+            if (isLoggedIn) {
+                alert('Viewing artwork details. In a real application, this would open the artwork in a modal or navigate to its page.');
+            } else {
+                alert('Please log in to view artwork details');
+                window.location.href = 'login.html';
+            }
+        });
+    });
+    
+    // Load more button
+    const loadMoreButton = document.querySelector('.center-button .btn-primary');
+    loadMoreButton.addEventListener('click', function() {
+        alert('In a real application, this would load more artists using pagination or infinite scroll.');
+    });
+});
+</script>
+</body>
+</html>
